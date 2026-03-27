@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { UserService } from '../../core/service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../../core/models/Login';
@@ -14,7 +14,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private destroyRef: DestroyRef) {}
+  private userService = inject(UserService);
+  private formBuilder = inject(FormBuilder);
+  private destroyRef = inject(DestroyRef);
 
   loginForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
