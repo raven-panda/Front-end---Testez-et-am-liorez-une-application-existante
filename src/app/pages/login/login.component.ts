@@ -46,10 +46,9 @@ export class LoginComponent implements OnInit {
     this.userService.login(loginUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-      (data) => {
-        console.log({data});
-        alert('SUCCESS!! :-) Jwt : ');
-        // TODO : router l'utilisateur vers la page de login
+      (jwt) => {;
+        alert(`SUCCESS!! :-) Jwt : ${jwt}`);
+        // TODO : use the JWT for authentication
       },
     );
   }
