@@ -5,6 +5,7 @@ import { MaterialModule } from '../../shared/material.module';
 import { UserService } from '../../core/service/user.service';
 import { Register } from '../../core/models/Register';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+  private router = inject(Router);
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
@@ -51,7 +53,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
       () => {
         alert('SUCCESS!! :-)');
-        // TODO : router l'utilisateur vers la page de login
+        this.router.navigate(['/login']);
       },
     );
   }
