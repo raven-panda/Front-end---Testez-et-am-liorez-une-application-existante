@@ -37,11 +37,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    const registerUser: Login = {
+    const loginUser: Login = {
       login: this.loginForm.get('login')?.value,
       password: this.loginForm.get('password')?.value
     };
-    this.userService.login(registerUser)
+    this.userService.login(loginUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
       (data) => {
