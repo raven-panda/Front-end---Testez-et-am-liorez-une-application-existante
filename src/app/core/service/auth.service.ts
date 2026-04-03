@@ -9,14 +9,29 @@ import { Login } from '../models/Login';
 })
 export class AuthService {
   private httpClient: HttpClient = inject(HttpClient);
+  private accessToken: string | null = null;
 
-  login(user: Login): Observable<Object> {
-    return this.httpClient.post('/api/login', user, {
+  login(user: Login): Observable<string> {
+    const request = this.httpClient.post('/api/login', user, {
       responseType: 'text'
     });
+
+    request.subscribe(data => {
+      this.accessToken = data;
+    });
+
+    return request;
   }
 
   register(user: Register): Observable<Object> {
     return this.httpClient.post('/api/register', user);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.accessToken;
+  }
+
+  getAccessToken(): string | null {
+    return this.accessToken;
   }
 }
