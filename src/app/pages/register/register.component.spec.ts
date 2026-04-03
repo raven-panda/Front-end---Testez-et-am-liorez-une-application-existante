@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
 import { provideHttpClient } from '@angular/common/http';
-import { UserService } from '../../core/service/user.service';
-import { UserMockService } from '../../core/service/user-mock.service';
+import { AuthService } from '../../core/service/auth.service';
+import { AuthMockService } from '../../core/service/auth-mock.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -14,7 +14,7 @@ describe('RegisterComponent', () => {
       imports: [RegisterComponent],
       providers: [
         provideHttpClient(),
-        { provide: UserService, useValue: UserMockService },
+        { provide: AuthService, useValue: AuthMockService },
       ]
     })
     .compileComponents();

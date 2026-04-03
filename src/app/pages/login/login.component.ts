@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { UserService } from '../../core/service/user.service';
+import { AuthService } from '../../core/service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../../core/models/Login';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  private userService = inject(UserService);
+  private userService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
 
