@@ -1,4 +1,4 @@
-<div class="card m-3">
+<div class="container card my-3 p-0">
   <h5 class="card-header">Login Form</h5>
   <div class="card-body">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -22,7 +22,7 @@
       <div class="form-group">
         <label>Password</label>
         <input
-          type="text"
+          type="password"
           formControlName="password"
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && form['password'].errors }"
