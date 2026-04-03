@@ -1,6 +1,17 @@
-<div class="card m-3">
-  <h5 class="card-header">Students list</h5>
-  <div class="card-body">
-    
+<section class="card m-3">
+  <div class="card-header d-flex justify-content-between">
+    <h5 class="m-0">Students list</h5>
+    <a routerLink="/student/create" type="button" class="btn btn-primary">Add a student</a>
   </div>
-</div>
+  <div class="card-body container-fluid list-container">
+    @for (student of students; track student.id) {
+      <div class="card bg-light py-2 px-3 d-flex justify-content-between">
+        <p>{{ student.firstName }} {{ student.lastName }}</p>
+        <a [routerLink]="`/student/edit/${student.id}`" type="button" class="btn btn-primary">Add a student</a>
+      </div>
+    }
+    @empty {
+      <div class="card bg-light border-0 py-2 px-3">No student registered yet</div>
+    }
+  </div>
+</section>
