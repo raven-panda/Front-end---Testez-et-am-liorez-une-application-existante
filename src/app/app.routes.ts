@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthGuard } from './core/authentication/auth.guard';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'student',
-    loadChildren: () => import("./pages/student/student.routes").then(m => m.routes)
+    loadChildren: () => import("./pages/student/student.routes").then(m => m.routes),
+    canActivate: [AuthGuard]
   },
 ];
