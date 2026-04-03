@@ -5,6 +5,7 @@ import { Login } from '../../core/models/Login';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialModule } from '../../shared/material.module';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   private userService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private router: Router = inject(Router);
 
   loginForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
@@ -46,9 +48,8 @@ export class LoginComponent implements OnInit {
     this.userService.login(loginUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
-      (jwt) => {;
-        alert(`SUCCESS!! :-) Jwt : ${jwt}`);
-        // TODO : use the JWT for authentication
+      () => {;
+        this.router.navigateByUrl("/student");
       },
     );
   }
