@@ -5,11 +5,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentCreate } from '../../../core/models/student/StudentCreate';
 import { StudentService } from '../../../core/service/student.service';
 import { MaterialModule } from '../../../shared/material.module';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-create-form',
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.css'
 })

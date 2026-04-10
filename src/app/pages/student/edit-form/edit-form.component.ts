@@ -6,11 +6,11 @@ import { Student } from '../../../core/models/student/Student';
 import { StudentUpdate } from '../../../core/models/student/StudentUpdate';
 import { StudentService } from '../../../core/service/student.service';
 import { MaterialModule } from '../../../shared/material.module';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-edit-form',
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './edit-form.component.html',
   styleUrl: './edit-form.component.css'
 })
