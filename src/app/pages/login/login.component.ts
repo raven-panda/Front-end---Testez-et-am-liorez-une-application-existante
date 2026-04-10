@@ -51,10 +51,9 @@ export class LoginComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         catchError((errData) => {
-          const error = errData?.error && JSON.parse(errData.error);
-          if (error?.message) {
+          if (errData?.error.message) {
             this.form['login']?.setErrors({
-              backend: error.message
+              backend: errData?.error.message
             });            
           }
           return new Observable<HttpEvent<any>>();
