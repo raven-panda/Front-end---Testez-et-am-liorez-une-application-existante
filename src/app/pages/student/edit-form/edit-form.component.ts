@@ -7,6 +7,8 @@ import { StudentUpdate } from '../../../core/models/student/StudentUpdate';
 import { StudentService } from '../../../core/service/student.service';
 import { MaterialModule } from '../../../shared/material.module';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { catchError, Observable } from 'rxjs';
+import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-edit-form',
@@ -64,7 +66,17 @@ export class StudentEditFormComponent {
     }
 
     this.studentService.updateStudent(payload.id, payload)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError((errData) => {
+          if (errData.error?.message) {
+            this.form['firstName']?.setErrors({
+              backend: errData.error.message
+            });
+          }
+          return new Observable<HttpEvent<any>>();
+        })
+      )
       .subscribe(data => {
         this.router.navigateByUrl(`/student`);
       });;

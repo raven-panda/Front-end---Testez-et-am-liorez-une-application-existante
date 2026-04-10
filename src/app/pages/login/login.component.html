@@ -15,6 +15,9 @@
             @if (form['login'].errors?.['required']) {
               <div>Login is required</div>
             }
+            @else if (form['login'].errors?.['backend']) {
+              <div>{{form['login'].errors?.['backend']}}</div>
+            }
           </div>
         }
       </div>

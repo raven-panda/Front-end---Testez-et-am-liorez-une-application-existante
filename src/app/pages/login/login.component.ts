@@ -6,6 +6,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialModule } from '../../shared/material.module';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { catchError, Observable } from 'rxjs';
+import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -46,9 +48,20 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password')?.value
     };
     this.userService.login(loginUser)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-      () => {;
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError((errData) => {
+          const error = errData?.error && JSON.parse(errData.error);
+          if (error?.message) {
+            this.form['login']?.setErrors({
+              backend: error.message
+            });            
+          }
+          return new Observable<HttpEvent<any>>();
+        })
+      )
+      .subscribe(() => {;
+        console.log('navigate');
         this.router.navigateByUrl("/student");
       },
     );
