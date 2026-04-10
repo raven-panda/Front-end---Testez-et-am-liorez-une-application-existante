@@ -6,6 +6,8 @@ import { StudentCreate } from '../../../core/models/student/StudentCreate';
 import { StudentService } from '../../../core/service/student.service';
 import { MaterialModule } from '../../../shared/material.module';
 import { Router, RouterLink } from '@angular/router';
+import { catchError, Observable } from 'rxjs';
+import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-create-form',
@@ -53,7 +55,17 @@ export class StudentCreateFormComponent {
     }
 
     this.studentService.createStudent(payload)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError((errData) => {
+          if (errData.error?.message) {
+            this.form['firstName']?.setErrors({
+              backend: errData.error.message
+            });
+          }
+          return new Observable<HttpEvent<any>>();
+        })
+      )
       .subscribe(data => {
         this.router.navigateByUrl(`/student`);
       });
