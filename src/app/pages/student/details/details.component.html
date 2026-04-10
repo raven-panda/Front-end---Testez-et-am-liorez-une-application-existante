@@ -14,12 +14,16 @@
       </div>
     </div>
     <div class="card-body d-flex">
-      <div class="card mr-4">
-        <mat-icon class="user-icon" aria-label="Student profile picture" fontIcon="account_circle"></mat-icon>
-      </div>
-      <div class="w-full">
-        <h2 class="h5 m-0">{{ student?.firstName }} {{ student?.lastName }}</h2>
-      </div>
+      @if (loading) {
+        <div class="card bg-light border-0 py-2 px-3">Loading students...</div>
+      } @else {
+        <div class="card mr-4">
+          <mat-icon class="user-icon" aria-label="Student profile picture" fontIcon="account_circle"></mat-icon>
+        </div>
+        <div class="w-full">
+          <h2 class="h5 m-0">{{ student?.firstName }} {{ student?.lastName }}</h2>
+        </div>
+      }
     </div>
   </div>
 </div>

@@ -4,18 +4,22 @@
     <a routerLink="/student/create" type="button" class="btn btn-primary">Add a student</a>
   </div>
   <div class="card-body container-fluid list-container">
-    @for (student of students; track student.id) {
-      <div class="card bg-light py-2 px-3 d-flex flex-row align-items-center justify-content-between">
-        <p class="m-0">{{ student.firstName }} {{ student.lastName }}</p>
-        <div class="d-flex flex-row">
-          <a [routerLink]="`/student/${student.id}`" type="button" class="btn btn-outline-primary mr-2">Details</a>
-          <a [routerLink]="`/student/${student.id}/edit`" type="button" class="btn btn-primary mr-2">Edit</a>
-          <button class="btn btn-danger" (click)="deleteStudent(student.id)">Delete</button>
+    @if (loading) {
+      <div class="card bg-light border-0 py-2 px-3">Loading students...</div>
+    } @else {
+      @for (student of students; track student.id) {
+        <div class="card bg-light py-2 px-3 d-flex flex-row align-items-center justify-content-between">
+          <p class="m-0">{{ student.firstName }} {{ student.lastName }}</p>
+          <div class="d-flex flex-row">
+            <a [routerLink]="`/student/${student.id}`" type="button" class="btn btn-outline-primary mr-2">Details</a>
+            <a [routerLink]="`/student/${student.id}/edit`" type="button" class="btn btn-primary mr-2">Edit</a>
+            <button class="btn btn-danger" (click)="deleteStudent(student.id)">Delete</button>
+          </div>
         </div>
-      </div>
-    }
-    @empty {
-      <div class="card bg-light border-0 py-2 px-3">No student registered yet</div>
+      }
+      @empty {
+        <div class="card bg-light border-0 py-2 px-3">No student registered yet</div>
+      }
     }
   </div>
 </section>

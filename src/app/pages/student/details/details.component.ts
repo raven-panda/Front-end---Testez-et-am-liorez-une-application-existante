@@ -16,6 +16,7 @@ export class StudentDetailsComponent {
   private router = inject(Router);
   private studentService = inject(StudentService);
 
+  loading: boolean = true;
   student: Student | null = null;
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class StudentDetailsComponent {
       this.studentService.getStudentById(+params['id'])
         .subscribe(data => {
           this.student = data;
+          this.loading = false;
         });
     });
   }
@@ -31,9 +33,11 @@ export class StudentDetailsComponent {
     if (!this.student)
       return;
 
+    this.loading = true;
     this.studentService.deleteStudent(this.student.id)
       .subscribe(() => {
-        this.router.navigateByUrl("/student")
+        this.router.navigateByUrl("/student");
+        this.loading = false;
       });
   }
 

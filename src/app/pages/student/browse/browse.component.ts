@@ -12,19 +12,23 @@ import { RouterLink } from "@angular/router";
 export class StudentBrowseComponent implements OnInit {
   private studentService: StudentService = inject(StudentService);
 
+  loading: boolean = true;
   students: Student[] = [];
 
   ngOnInit(): void {
     this.studentService.getAll().subscribe((students) => {
       this.students = students;
+      this.loading = false;
     });
   }
 
   deleteStudent(id: number): void {
+    this.loading = true;
     this.studentService.deleteStudent(id)
       .subscribe(() => {
         this.studentService.getAll().subscribe((students) => {
           this.students = students;
+          this.loading = false;
         });
       });
   }

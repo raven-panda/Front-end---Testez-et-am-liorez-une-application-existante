@@ -21,6 +21,7 @@ export class StudentCreateFormComponent {
   private destroyRef = inject(DestroyRef);
   private router: Router = inject(Router);
 
+  loading: boolean = false;
   studentForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
 
@@ -63,16 +64,19 @@ export class StudentCreateFormComponent {
               backend: errData.error.message
             });
           }
+          this.loading = false;
           return new Observable<HttpEvent<any>>();
         })
       )
       .subscribe(data => {
         this.router.navigateByUrl(`/student`);
+        this.loading = false;
       });
   }
 
   onReset(): void {
     this.submitted = false;
+    this.loading = false;
     this.studentForm.reset();
   }
 }

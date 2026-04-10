@@ -23,6 +23,7 @@ export class StudentEditFormComponent {
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
 
+  loading: boolean = true;
   student: Student | null = null;
   studentForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
@@ -42,6 +43,7 @@ export class StudentEditFormComponent {
             firstName: data.firstName,
             lastName: data.lastName,
           });
+          this.loading = false;
         });
     });
   }
@@ -64,7 +66,8 @@ export class StudentEditFormComponent {
         lastName: this.studentForm.get("lastName")?.value,
       }
     }
-
+    
+    this.loading = true;
     this.studentService.updateStudent(payload.id, payload)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -74,16 +77,19 @@ export class StudentEditFormComponent {
               backend: errData.error.message
             });
           }
+          this.loading = false;
           return new Observable<HttpEvent<any>>();
         })
       )
       .subscribe(data => {
         this.router.navigateByUrl(`/student`);
-      });;
+        this.loading = false;
+      });
   }
 
   onReset(): void {
     this.submitted = false;
+    this.loading = false;
     this.studentForm.reset();
   }
 }
