@@ -5,9 +5,9 @@
   </div>
   <div class="card-body container-fluid list-container">
     @for (student of students; track student.id) {
-      <div class="card bg-light py-2 px-3 d-flex justify-content-between">
-        <p>{{ student.firstName }} {{ student.lastName }}</p>
-        <a [routerLink]="`/student/edit/${student.id}`" type="button" class="btn btn-primary">Add a student</a>
+      <div class="card bg-light py-2 px-3 d-flex flex-row align-items-center justify-content-between">
+        <p class="m-0">{{ student.firstName }} {{ student.lastName }}</p>
+        <a [routerLink]="`/student/edit/${student.id}`" type="button" class="btn btn-outline-primary">Edit</a>
       </div>
     }
     @empty {
