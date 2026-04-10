@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MaterialModule } from "../../../shared/material.module";
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { Student } from '../../../core/models/student/Student';
 import { StudentService } from '../../../core/service/student.service';
 
@@ -13,6 +13,7 @@ import { StudentService } from '../../../core/service/student.service';
 })
 export class StudentDetailsComponent {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private studentService = inject(StudentService);
 
   student: Student | null = null;
@@ -24,6 +25,16 @@ export class StudentDetailsComponent {
           this.student = data;
         });
     });
+  }
+
+  deleteStudent(): void {
+    if (!this.student)
+      return;
+
+    this.studentService.deleteStudent(this.student.id)
+      .subscribe(() => {
+        this.router.navigateByUrl("/student")
+      });
   }
 
 }

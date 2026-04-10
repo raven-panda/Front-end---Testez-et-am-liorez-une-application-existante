@@ -9,7 +9,8 @@
         <p class="m-0">{{ student.firstName }} {{ student.lastName }}</p>
         <div class="d-flex flex-row">
           <a [routerLink]="`/student/${student.id}`" type="button" class="btn btn-outline-primary mr-2">Details</a>
-          <a [routerLink]="`/student/${student.id}/edit`" type="button" class="btn btn-primary">Edit</a>
+          <a [routerLink]="`/student/${student.id}/edit`" type="button" class="btn btn-primary mr-2">Edit</a>
+          <button class="btn btn-danger" (click)="deleteStudent(student.id)">Delete</button>
         </div>
       </div>
     }

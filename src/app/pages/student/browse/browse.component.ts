@@ -19,4 +19,13 @@ export class StudentBrowseComponent implements OnInit {
       this.students = students;
     });
   }
+
+  deleteStudent(id: number): void {
+    this.studentService.deleteStudent(id)
+      .subscribe(() => {
+        this.studentService.getAll().subscribe((students) => {
+          this.students = students;
+        });
+      });
+  }
 }
