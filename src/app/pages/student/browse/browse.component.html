@@ -1,7 +1,7 @@
 <section class="container card my-3 p-0">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="m-0">Students list</h5>
-    <a routerLink="/student/create" type="button" class="btn btn-primary">Add a student</a>
+    <a routerLink="/student/create" type="button" class="btn btn-primary" data-test-id="create-student-link">Add a student</a>
   </div>
   <div class="card-body container-fluid list-container">
     @if (loading) {
@@ -11,9 +11,9 @@
         <div class="card bg-light py-2 px-3 d-flex flex-row align-items-center justify-content-between">
           <p class="m-0">{{ student.firstName }} {{ student.lastName }}</p>
           <div class="d-flex flex-row">
-            <a [routerLink]="`/student/${student.id}`" type="button" class="btn btn-outline-primary mr-2">Details</a>
-            <a [routerLink]="`/student/${student.id}/edit`" type="button" class="btn btn-primary mr-2">Edit</a>
-            <button class="btn btn-danger" (click)="deleteStudent(student.id)">Delete</button>
+            <a [routerLink]="`/student/${student.id}`" type="button" class="btn btn-outline-primary mr-2" data-test-id="student-details-btn">Details</a>
+            <a [routerLink]="`/student/${student.id}/edit`" type="button" class="btn btn-primary mr-2" data-test-id="edit-student-btn">Edit</a>
+            <button class="btn btn-danger" (click)="deleteStudent(student.id)" data-test-id="delete-student-btn">Delete</button>
           </div>
         </div>
       }

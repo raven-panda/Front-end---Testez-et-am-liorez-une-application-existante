@@ -16,6 +16,7 @@
               type="text"
               formControlName="firstName"
               class="form-control"
+              data-test-id="firstName-field"
               [ngClass]="{ 'is-invalid': submitted && form['firstName'].errors }"
             />
             @if (submitted && form['firstName'].errors) {
@@ -35,6 +36,7 @@
               type="text"
               formControlName="lastName"
               class="form-control"
+              data-test-id="lastName-field"
               [ngClass]="{ 'is-invalid': submitted && form['lastName'].errors }"
             />
             @if (submitted && form['lastName'].errors) {
@@ -47,7 +49,7 @@
           </div>
 
           <div class="text-center">
-            <button class="btn btn-primary mr-1">Edit</button>
+            <button class="btn btn-primary mr-1" data-test-id="edit-form-submit-btn">Edit</button>
             <button class="btn btn-secondary" type="reset" (click)="onReset()">
               Cancel
             </button>
