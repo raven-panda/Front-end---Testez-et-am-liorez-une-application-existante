@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from '@jest/globals';
 
-import { RegisterComponent } from './register.component';
-import { provideHttpClient } from '@angular/common/http';
-import { AuthService } from '../../core/service/auth.service';
 import { AuthMockService } from '../../core/service/auth-mock.service';
+import { AuthService } from '../../core/service/auth.service';
+import testProviders from '../../test-providers';
+import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -13,8 +14,8 @@ describe('RegisterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RegisterComponent],
       providers: [
-        provideHttpClient(),
-        { provide: AuthService, useValue: AuthMockService },
+        ...testProviders,
+        { provide: AuthService, useClass: AuthMockService },
       ]
     })
     .compileComponents();

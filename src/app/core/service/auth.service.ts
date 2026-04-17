@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Register } from '../models/Register';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Login } from '../models/Login';
 import { LoginResponse } from '../models/LoginResponse';
 
@@ -15,14 +15,12 @@ export class AuthService {
   private accessToken: string | null = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
 
   login(user: Login): Observable<LoginResponse> {
-    const request = this.httpClient.post<LoginResponse>('/api/login', user);
-
-    request.subscribe(data => {
+    return this.httpClient.post<LoginResponse>('/api/login', user).pipe(
+      tap((data) => {
       this.accessToken = data.token;
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, data.token);
-    });
-
-    return request;
+      })
+    );
   }
 
   register(user: Register): Observable<Object> {

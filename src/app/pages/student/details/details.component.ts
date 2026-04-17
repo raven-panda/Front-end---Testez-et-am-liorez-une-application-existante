@@ -7,6 +7,7 @@ import { StudentService } from '../../../core/service/student.service';
 
 @Component({
   selector: 'app-student-details',
+  standalone: true,
   imports: [MaterialModule, MatIconModule, RouterLink],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'

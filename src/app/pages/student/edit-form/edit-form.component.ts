@@ -12,6 +12,7 @@ import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-edit-form',
+  standalone: true,
   imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './edit-form.component.html',
   styleUrl: './edit-form.component.css'

@@ -11,6 +11,7 @@ import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-create-form',
+  standalone: true,
   imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './create-form.component.html',
   styleUrl: './create-form.component.css'
